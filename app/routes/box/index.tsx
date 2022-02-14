@@ -3,7 +3,7 @@ import type { LinksFunction, LoaderFunction } from "remix"
 import { db } from "~/utils/db.server"
 
 type LoaderData = {
-    BoxListItems: Array<{ id: string; room: string; size: string}>
+    BoxListItems: Array<{ id: string; room: string; size: string; name: string;}>
 }
 
 export const loader: LoaderFunction = async () => {
@@ -27,8 +27,9 @@ export default function Boxes() {
                     data.BoxListItems.map((box) => (
                         <Link to={`/box/${box.id}`}>
                             <div className="flex flex-col border border-slate-400 rounded p-4">
-                                <h3 className="text-3xl">{box.room}</h3>
-                                <h4>{box.size}</h4>
+                                <h3 className="text-3xl font-bold">{box.name}</h3>
+                                <h4 className="text-xl">{box.room}</h4>
+                                <p className="font-thin">{box.size}</p>
                             </div>
                             
                         </Link>
