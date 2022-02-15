@@ -4,6 +4,7 @@ import { db } from "~/utils/db.server"
 export const loader: LoaderFunction = async ({ params }) => {
     const box = await db.box.findUnique({ where: {id: params.boxId} })
     const items = await db.item.findMany({ where: {boxId: params.boxId}})
+    console.log(params)
     return { ...box, items}
 }
 
