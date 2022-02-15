@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from "remix"
+import { Link, LoaderFunction, useLoaderData } from "remix"
 import { db } from "~/utils/db.server"
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -11,17 +11,24 @@ export default function BoxPage() {
     const uniqueBox = useLoaderData()
     console.log(uniqueBox)
     return (
-        <div className="border border-slate-200 rounded p-4">
-            <h1 className="text-3xl font-bold">{uniqueBox.name}</h1>
-            <h4>Room: {uniqueBox.room}</h4>
-            <p>Size: {uniqueBox.size}</p>
-            <div>
-                {
-                    uniqueBox.items.map((item) => (
-                        <p key={item.id}>{item.name}</p>
-                    ))
-                }
+        <div className="flex flex-col">
+            <div className="mb-4">
+                <Link to='/box'>Go Back</Link>
+                <Link to='/'>Home</Link>
+            </div>
+            <div className="border border-slate-200 rounded p-4">
+                <h1 className="text-3xl font-bold">{uniqueBox.name}</h1>
+                <h4>Room: {uniqueBox.room}</h4>
+                <p>Size: {uniqueBox.size}</p>
+                <div>
+                    {
+                        uniqueBox.items.map((item) => (
+                            <p key={item.id}>{item.name}</p>
+                        ))
+                    }
+                </div>
             </div>
         </div>
+        
     )
 }
