@@ -12,9 +12,9 @@ export default function BoxPage() {
     console.log(uniqueBox)
     return (
         <div className="flex flex-col">
-            <div className="mb-4">
-                <Link to='/box'>Go Back</Link>
-                <Link to='/'>Home</Link>
+            <div className="mb-4 flex justify-between">
+                <Link to='/box' className="hover:underline">Go Back</Link>
+                <Link to='/'>Add Item</Link>
             </div>
             <div className="border border-slate-200 rounded p-4">
                 <h1 className="text-3xl font-bold">{uniqueBox.name}</h1>
