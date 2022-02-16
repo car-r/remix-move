@@ -40,6 +40,7 @@ export default function NewItem() {
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box: </label>
                     <select name="boxId" className="border border-slate-200 rounded px-2 py-1">
+                        {/* TO DO - Don't assign a box to an item - Assign as Unpacked as workaround? */}
                         {boxes.map((box) => (
                             <option value={box.id}>{box.name}</option>
                         ))}
