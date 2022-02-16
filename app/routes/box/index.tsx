@@ -24,7 +24,7 @@ export default function Boxes() {
             <h1 className="text-4xl mb-2">Boxes</h1>
             <div className="flex mb-2">
                 <Link to='new'
-                    className="bg-slate-200 py-2 px-6 rounded hover:bg-slate-400">
+                    className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300">
                     Add Box
                 </Link>
             </div>
