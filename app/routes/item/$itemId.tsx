@@ -40,7 +40,7 @@ export default function ItemPage() {
             <div className="border border-slate-200 rounded p-4">
                 <h1 className="text-2xl">{uniqueItem.name}</h1>
                 { uniqueItem.box.name ? <p>Box: {uniqueItem.box.name}</p> : <p>Unpacked</p> }
-                <p>Created: {uniqueItem.createdAt.slice(0, 10)}</p>
+                <p>Created: {uniqueItem.createdAt}</p>
             </div>
             
         </div>
