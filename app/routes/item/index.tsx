@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async () => {
 
 export default function Items() {
     const data = useLoaderData<LoaderData>()
-    // console.log(data)
+    console.log(data)
     return (
         <div>
             <h1 className="text-3xl">Items</h1>
