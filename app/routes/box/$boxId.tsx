@@ -5,16 +5,16 @@ import { db } from "~/utils/db.server"
 export const loader: LoaderFunction = async ({ params }) => {
     const box = await db.box.findUnique({ where: {id: params.boxId} })
     const items = await db.item.findMany({ where: {boxId: params.boxId}})
-    console.log(params)
+    
+    
     return { ...box, items}
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
     const form = await request.formData()
 
-    // grab Unpacked Items box
-    
-    
+    // grab Unpacked Items boxId 
+    const unassignedBox = await db.box.findMany({ where: {name: 'Unpacked Items'}})
     // need to reassign all items in the box to another box
     const items = await db.item.findMany({ where: {boxId: params.boxId}})
     await db.item.updateMany({
@@ -22,7 +22,7 @@ export const action: ActionFunction = async ({ request, params }) => {
             boxId: params.boxId || undefined
         },
         data: {
-            boxId: '5ea9dfa8-f518-4eac-9bdc-8bb6f3e2ce4d'
+            boxId: unassignedBox[0].id
         }
     })
 
@@ -33,7 +33,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function BoxPage() {
     const uniqueBox = useLoaderData()
-    console.log(uniqueBox)
+    // console.log(uniqueBox)
     return (
         <div className="flex flex-col">
             <div className="mb-4 flex justify-between">
