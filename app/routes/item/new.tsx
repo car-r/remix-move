@@ -10,6 +10,7 @@ export const loader: LoaderFunction = async () => {
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
+    console.log(Object.fromEntries(form))
     const name = form.get('name')
     const boxId = form.get('boxId')
     
