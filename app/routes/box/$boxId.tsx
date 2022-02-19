@@ -7,35 +7,35 @@ export const loader: LoaderFunction = async ({ params }) => {
     const box = await db.box.findUnique({ where: {id: params.boxId} })
     const items = await db.item.findMany({ where: {boxId: params.boxId}})
     
-    
     return { ...box, items}
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
     const form = await request.formData()
+    
     console.log(Object.fromEntries(form))
     
-   
     // grab Unpacked Items boxId // findUnique wouldn't work??? vvv
     const unassignedBox = await db.box.findMany({ where: {name: 'Unpacked Items'}})
-    // need to reassign all items in the box to another box
-    const items = await db.item.findMany({ where: {boxId: params.boxId}})
-    await db.item.updateMany({
+    // need to reassign all items in the box to Unpacked Items box
+
+    if (form.get('_method') !== "Unpacked Items") {
+        const items = await db.item.findMany({ where: {boxId: params.boxId}})
+        await db.item.updateMany({
         where: {
             boxId: params.boxId || undefined
         },
         data: {
             boxId: unassignedBox[0].id
-        }
-    })
+        }})
 
-    await db.box.delete({ where: { id: params.boxId }})
+        await db.box.delete({ where: { id: params.boxId }})
 
-    return redirect('/box')
-    
-    
+        return redirect('/box')
+    }
 
-    
+    // update to display to screen
+    throw Error('Cannot delete Unpacked Items')
 }
 
 export default function BoxPage() {
@@ -45,15 +45,23 @@ export default function BoxPage() {
         <div className="flex flex-col">
             <div className="mb-4 flex justify-between">
                 <Link to='/item/new' className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300">Add Item</Link>
-                <form method="post">
-                    <input type="hidden" name="_method" id={uniqueBox.id} value='delete'/>
-                    
-                    <button type="submit" name="_action" value="delete"
-                        className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300"
+                {uniqueBox.name === 'Unpacked Items' ? 
+                    <Link to='/box'
+                    className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300"
                     >
-                        Delete
-                    </button>
-                </form>
+                        Boxes
+                    </Link>
+                :    
+                    <form method="post">
+                        <input type="hidden" name="_method" id={uniqueBox.id} value='delete'/>
+                        <input type="hidden" name="_method" value={uniqueBox.name}/>
+                        <button type="submit" name="_action" value="delete"
+                            className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300"
+                        >
+                            Delete
+                        </button>
+                    </form>
+                }
             </div>
             {/* TO DO | Add Outlet route to Add Item to Box */}
            
