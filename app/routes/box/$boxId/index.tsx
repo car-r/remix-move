@@ -30,12 +30,12 @@ export default function BoxIdOutlet() {
     const box = useLoaderData()
     
     return (
-        <div>
-            <h1>BoxIdOulet</h1>
+        <div className="flex border border-slate-200 p-4 rounded mb-4">
+            
             <form method="post">
                 <div className="flex flex-col mb-4">
-                    <label className="mb-2">Name: </label>
-                    <input type="text" name="name"  className="border border-slate-200 rounded px-2 py-1"/>
+                    <label className="mb-2" >Name: </label>
+                    <input type="text" name="name" placeholder="Enter Item Name" className="border border-slate-200 rounded px-2 py-1"/>
                 </div>
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box: </label>
@@ -43,7 +43,7 @@ export default function BoxIdOutlet() {
                             <option value={box.id}>{box.name}</option>
                     </select>
                 </div>
-                <button type="submit" name="_method" value="create" className="bg-slate-200 py-2 px-6 rounded hover:bg-slate-400">
+                <button type="submit" name="_method" value="create" className="bg-slate-400 border border-slate-400/75 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black hover:border hover:border-slate-400 transition-all ease-in-out duration-300">
                     Add Item
                 </button>
             </form>

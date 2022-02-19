@@ -60,7 +60,7 @@ export default function BoxPage() {
     // console.log(uniqueBox)
     const [outlet, setOutlet] = useState(false)
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col my-4">
             <div className="mb-4 flex justify-between">
                 <div onClick={() => setOutlet(!outlet)} className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300 cursor-pointer">Add Item</div>
                 {uniqueBox.name === 'Unpacked Items' ? 

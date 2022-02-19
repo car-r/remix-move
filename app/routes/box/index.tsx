@@ -17,8 +17,11 @@ export const loader: LoaderFunction = async () => {
 
 export default function Boxes() {
     const data = useLoaderData<LoaderData>()
-    console.log(data)
+    
+    const withoutUnpackedItems = data.BoxListItems.filter(box => box.name !== 'Unpacked Items')
+    const unpackedItemsBox = data.BoxListItems.filter(box => box.name === 'Unpacked Items')
 
+    console.log(withoutUnpackedItems, unpackedItemsBox)
     return (
         <div className="flex flex-col">
             <h1 className="text-4xl mb-2">Boxes</h1>
@@ -35,14 +38,26 @@ export default function Boxes() {
             
             <ul className="grid grid-cols-1 gap-4">
                 {
-                    data.BoxListItems.map((box) => (
+                    withoutUnpackedItems.map((box) => (
                         <Link to={`/box/${box.id}`}>
                             <div className="flex flex-col border border-slate-400 rounded p-4">
                                 <h3 className="text-3xl font-bold">{box.name}</h3>
                                 <h4 className="text-xl">{box.room}</h4>
                                 <p className="font-thin">{box.size}</p>
                             </div>
-                        </Link>
+                        </Link> 
+                    ))
+                    
+                }
+                {
+                    unpackedItemsBox.map((box) => (
+                        <Link to={`/box/${box.id}`}>
+                            <div className="flex flex-col border border-slate-400 rounded p-4">
+                                <h3 className="text-3xl font-bold">{box.name}</h3>
+                                <h4 className="text-xl">{box.room}</h4>
+                                <p className="font-thin">{box.size}</p>
+                            </div>
+                        </Link> 
                     ))
                 }
             </ul>
