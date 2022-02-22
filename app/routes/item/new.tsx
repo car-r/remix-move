@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect, useLoaderData } from "remix"
+import { json, LoaderFunction, redirect, useActionData, useLoaderData } from "remix"
 import type { ActionFunction } from "remix"
 
 import { db } from "~/utils/db.server"
@@ -8,27 +8,98 @@ export const loader: LoaderFunction = async () => {
     return boxes
 }
 
+function validateItemName(name: string) {
+    if (name.length < 3) {
+        return `Item name too short`;
+    }
+}
+
+type ActionData = {
+    formError?: string;
+    fieldErrors?: {
+        name: string | undefined;
+    }
+    fields? : {
+        name: string;
+    }
+}
+
+const badRequest = (data: ActionData) => json(data, { status: 400 });
+
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
     console.log(Object.fromEntries(form))
     const name = form.get('name')
     const boxId = form.get('boxId')
     
+    // FROM REMIX TUTORIAL DOCUMENTATION
+    // https://remix.run/docs/en/v1/tutorials/jokes
 
-    if (
-        typeof name !== 'string' ||
-        typeof boxId !== 'string'
-    ) {
-        throw new Error('Form not submitted correctly.')
+    // if (
+    //     typeof name !== 'string' ||
+    //     typeof boxId !== 'string'
+    // ) {
+    //     // throw new Error('Form not submitted correctly.')
+    //     return badRequest({
+    //         formError: `Form not submitted correctly.`
+    //     })
+    // }
+
+    // const fieldErrors = {
+    //     name: validateItemName(name)
+    // }
+
+    // const fields = { name, boxId }
+
+    // if (Object.values(fieldErrors).some(Boolean)) {
+    //     return badRequest({ fieldErrors, fields })
+    // }
+
+
+
+    // WORKING VALIDATION
+
+    const errors = {
+        name: '',
     }
 
+    function checkItemName(name) {
+        if(!name || name.length < 3) {
+            return errors.name = `Item name too short`
+        }
+    }
+    checkItemName(name)
+
+    if (errors.name) {
+        const values = Object.fromEntries(form)
+        return { errors, values }
+    }
+
+    
+
+
+    // FROM REMIX DOCUMENTATION || Error WORKING but can't submit
+    // https://remix.run/docs/en/v1/api/remix#useactiondata
+    // const errors = { name: ''}
+
+    // if (typeof name !== 'string' || name.length < 3) {
+    //     errors.name = `Item name too short`
+    // }
+
+    // if (Object.keys(errors).length) {
+    //     return json(errors, { status: 422 })
+    // }
+
     const fields = { name, boxId }
+
     const item = await db.item.create( {data: fields })
     return redirect(`/item/${item.id}`)
 }
 
 export default function NewItem() {
     const boxes = useLoaderData()
+    const actionData = useActionData()
+    // const errors = useActionData()
     console.log(boxes)
     return (
         <div>
@@ -37,6 +108,21 @@ export default function NewItem() {
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Name: </label>
                     <input type="text" name="name" className="border border-slate-200 rounded px-2 py-1"/>
+                    {actionData?.errors?.name ? (
+                            <p
+                                className="text-red-400"
+                            >
+                                {actionData.errors.name}
+                            </p>
+                        ) : null
+                    }
+                    {/* {errors?.name ? (
+                        <p
+                        className="text-red-400"
+                    >
+                        {errors.name}
+                    </p>
+                    ): null} */}
                 </div>
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box: </label>

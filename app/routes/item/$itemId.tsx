@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { ActionFunction, Link, LoaderFunction, Outlet, redirect, useLoaderData } from "remix"
+import EditItemComponent from "~/components/EditItemComponent"
+import EditItem from "~/components/EditItemComponent"
 import { db } from "~/utils/db.server"
 
 export const loader: LoaderFunction = async ({ params }) => {
     const item = await db.item.findUnique({ where: {id: params.itemId} })
     const box = await db.box.findUnique({ where: {id: item?.boxId}})
+    const boxes = await db.box.findMany()
     // console.log(params)
-    return {...item, box}
+    return {...item, box, boxes}
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -18,13 +21,30 @@ export const action: ActionFunction = async ({ request, params }) => {
     if (form.get('_method') === 'update') {
         const name = form.get('name')
         const boxId = form.get('boxId')
-        const fields = { name, boxId }
-        if (
-            typeof name !== 'string' ||
-            typeof boxId !== 'string'
-        ) {
-            throw new Error('Form not submitted correctly.')
+
+        const errors = {
+            name: '',
         }
+
+        function checkItemName(name) {
+            if(!name || name.length < 3) {
+                return errors.name = `Item name too short`
+            }
+        }
+        checkItemName(name)
+
+        if (errors.name) {
+            const values = Object.fromEntries(form)
+            return { errors, values }
+        }
+
+        const fields = { name, boxId }
+        // if (
+        //     typeof name !== 'string' ||
+        //     typeof boxId !== 'string'
+        // ) {
+        //     throw new Error('Form not submitted correctly.')
+        // }
         await db.item.update({where: {id: params.itemId}, data: fields })
         return redirect(`/box/${boxId}`)
     }
@@ -51,14 +71,15 @@ export default function ItemPage() {
                     Edit Item
                 </div>
             </div>
-            {updateItem ? <Outlet /> : <div></div>}
+            {/* {updateItem ? <Outlet /> : <div></div>} */}
+            { updateItem ? <EditItemComponent uniqueItem={uniqueItem}/> : <div></div> }
             
             <div className="border border-slate-200 rounded p-4 mb-4">
                 <h1 className="text-2xl">{uniqueItem.name}</h1>
                 { uniqueItem.box.name ? <p>Box: {uniqueItem.box.name}</p> : <p>Unpacked</p> }
                 <p>Created: {uniqueItem.createdAt}</p>
             </div>
-            {updateItem ? 
+            {/* {updateItem ? 
                 <form method="post">
                     <input type="hidden" name="id" id={uniqueItem.id} />
                     
@@ -70,7 +91,7 @@ export default function ItemPage() {
                 </form>
                 :
                 <div></div>
-            }
+            } */}
             
         </div>
         
