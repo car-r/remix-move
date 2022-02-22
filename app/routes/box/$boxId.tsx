@@ -67,25 +67,51 @@ export const action: ActionFunction = async ({ request, params }) => {
     if (form.get('_method') === 'create') {
         const name = form.get('name')
         const boxId = form.get('boxId')
-        if (
-            typeof name !== 'string' ||
-            typeof boxId !== 'string'
-        ) {
-            // throw new Error('Form not submitted correctly.')
-            return badRequest({
-                formError: `Form not submitted correctly.`
-            })
+
+        // if (
+        //     typeof name !== 'string' ||
+        //     typeof boxId !== 'string'
+        // ) {
+        //     // throw new Error('Form not submitted correctly.')
+        //     return badRequest({
+        //         formError: `Form not submitted correctly.`
+        //     })
+        // }
+
+        const errors = {
+            name: '',
+            boxId: ''
         }
 
-        const fieldErrors = {
-            name: validateItemName(name)
+        function checkItemName(name) {
+            if(!name || name.length < 3) {
+                return errors.name = `Item name too short`
+            }
         }
+        checkItemName(name)
+
+        // if (!name) {
+        //     errors.name = 'Please provide an Item name'
+        // }
+
+        if (!boxId) {
+            errors.boxId = 'Please select a box'
+        }
+
+        if (errors.name || errors.boxId) {
+            const values = Object.fromEntries(form)
+            return { errors, values }
+        }
+
+        // const fieldErrors = {
+        //     name: validateItemName(name)
+        // }
 
         const fields = { name, boxId }
         
-        if(Object.values(fieldErrors).some(Boolean)) {
-            return badRequest({ fieldErrors, fields })
-        }
+        // if(Object.values(fieldErrors).some(Boolean)) {
+        //     return badRequest({ fieldErrors, fields })
+        // }
 
         const item = await db.item.create( {data: fields })
         return redirect(`/box/${boxId}`)
@@ -95,8 +121,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         const name = form.get('name')
         const room = form.get('room')
         const size = form.get('size')
-
-        
+ 
     // if (
     //     typeof name !== 'string' ||
     //     typeof room !== 'string' ||
@@ -112,12 +137,28 @@ export const action: ActionFunction = async ({ request, params }) => {
             room: ''
         }
 
-        if (!name) {
-            errors.name = 'Please provide a box name'
+        // if (!name) {
+        //     errors.name = 'Please provide a box name'
+        // }
+
+        function checkBoxName(name) {
+            if(!name || name.length < 3) {
+                return errors.name = `Box name too short`
+            }
         }
-        if (!room) {
-            errors.room = 'Please provide a room name'
+        checkBoxName(name)
+
+        // if (!room) {
+        //     errors.room = 'Please provide a room name'
+        // }
+
+        function checkRoomName(name) {
+            if(!room || room.length < 3) {
+                return errors.room = `Room name too short`
+            }
         }
+        checkRoomName(name)
+
         if (errors.name || errors.room) {
             const values = Object.fromEntries(form)
             return { errors, values }
@@ -152,11 +193,12 @@ export default function BoxPage() {
     const actionData = useActionData<ActionData>()
     // console.log(uniqueBox)
     const [outlet, setOutlet] = useState(false)
+    const [showAddItem, setShowAddItem] = useState(false)
     const [showEditBox, setShowEditBox] = useState(false)
     return (
         <div className="flex flex-col my-4">
             <div className="mb-4 flex justify-between">
-                <div onClick={() => setOutlet(!outlet)} className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300 cursor-pointer">Add Item</div>
+                <div onClick={() => setShowAddItem(!showAddItem)} className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300 cursor-pointer">Add Item</div>
                 {uniqueBox.name === 'Unpacked Items' ? 
                     <Link 
                         to='/box' 
@@ -164,7 +206,8 @@ export default function BoxPage() {
                     >
                         Boxes
                     </Link> :
-                    <div onClick={() => setShowEditBox(!showEditBox)} 
+                    <div 
+                        onClick={() => setShowEditBox(!showEditBox)} 
                         className="bg-slate-400 border border-slate-400/75 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black hover:border hover:border-slate-400 transition-all ease-in-out duration-300 cursor-pointer"
                     >
                         Edit Box
@@ -174,7 +217,8 @@ export default function BoxPage() {
 
             {/* Add item Outlet display on state change */}
             {outlet ? <Outlet /> : <div></div>}
-            
+            {/* <Outlet /> */}
+            {showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : <div></div>}
             {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : <div></div>}
             
             <div className="border border-slate-200 rounded p-4">
