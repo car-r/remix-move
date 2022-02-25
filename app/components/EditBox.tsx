@@ -5,7 +5,7 @@ import { action } from "~/routes/box/$boxId"
 export default function EditBox({ uniqueBox }) {
     const actionData = useActionData()
     return (
-        <div className="mb-4 flex border border-slate-200 p-4 rounded">
+        <div className="mb-4 flex p-4 rounded-md bg-white">
             <form method="post" className="w-full">
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box Name: </label>
@@ -27,8 +27,8 @@ export default function EditBox({ uniqueBox }) {
                         defaultValue={uniqueBox.room} 
                         className="border border-slate-200 rounded px-2 py-1"/>
                         {actionData?.errors.room && (
-                        <p className="text-red-400">{actionData.errors.room}</p>
-                    ) }
+                            <p className="text-red-400">{actionData.errors.room}</p>
+                        ) }
                 </div>
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box Size: </label>
@@ -39,7 +39,7 @@ export default function EditBox({ uniqueBox }) {
                     </select>
                 </div>
                 <div className="flex justify-between">
-                    <button type="submit" name="_method" value="update" className="bg-blue-500/75 text-white py-2 px-6 rounded hover:bg-blue-700/75 transition-all duration-300">
+                    <button type="submit" name="_method" value="update" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300">
                         Save Box
                     </button>
                     <button type="submit" name="_method" value="delete" className="bg-red-400 text-white py-2 px-6 rounded hover:bg-red-600 transition-all duration-300">

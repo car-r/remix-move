@@ -31,14 +31,13 @@ export default function Dashboard() {
                 </Link>
                 {
                     data.rooms.map((room: room) => (
-                        <div className="border rounded-md p-2 bg-white">
+                        <Link to={`/room/${room.room}`}className="border rounded-md p-2 bg-white">
                             <p className="text-center text-8xl mb-2">{room._count}</p>
                             <h2 className="text-2xl text-center">{room.room} boxes</h2>
-                        </div>
+                        </Link>
                     ))
                 }
             </div>
-            
         </div>
     )
 }
