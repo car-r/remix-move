@@ -9,7 +9,8 @@ export const loader: LoaderFunction = async () => {
     const kitchenBoxes = await db.box.count({ where: {room: 'Kitchen'}})
     const bedroomBoxes = await db.box.count({ where: {room: 'Bedroom'}})
     const bathroomBoxes = await db.box.count({ where: {room: 'Bathroom'}})
-    let data = [numberOfBoxes, numberOfItems, kitchenBoxes, bedroomBoxes, bathroomBoxes]
+    const rooms = await db.box.groupBy({ by: ['room']})
+    let data = [numberOfBoxes, numberOfItems, kitchenBoxes, bedroomBoxes, bathroomBoxes, rooms]
     return data
 }
 
