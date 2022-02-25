@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ActionFunction, Link, LoaderFunction, Outlet, redirect, useLoaderData } from "remix"
 import EditItemComponent from "~/components/EditItemComponent"
 import EditItem from "~/components/EditItemComponent"
+import ItemRouteCard from "~/components/ItemRouteCard"
 import { db } from "~/utils/db.server"
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -74,11 +75,7 @@ export default function ItemPage() {
             {/* {updateItem ? <Outlet /> : <div></div>} */}
             { updateItem ? <EditItemComponent uniqueItem={uniqueItem}/> : <div></div> }
             
-            <div className="border border-slate-200 rounded p-4 mb-4">
-                <h1 className="text-2xl">{uniqueItem.name}</h1>
-                { uniqueItem.box.name ? <p>Box: {uniqueItem.box.name}</p> : <p>Unpacked</p> }
-                <p>Created: {uniqueItem.createdAt}</p>
-            </div>
+            <ItemRouteCard item={uniqueItem}/>
             {/* {updateItem ? 
                 <form method="post">
                     <input type="hidden" name="id" id={uniqueItem.id} />

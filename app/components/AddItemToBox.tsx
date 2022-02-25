@@ -6,7 +6,7 @@ import { db } from "~/utils/db.server"
 export default function AddItemToBox({uniqueBox}) {
     const actionData = useActionData()
     return (
-        <div className="mb-4 flex border border-slate-200 p-4 rounded">
+        <div className="mb-4 flex p-4 rounded-md bg-white">
             <form method="post" className="w-full">
                 <input type="hidden" name="_method" value="addBox" />
                 <div className="flex flex-col mb-4">
@@ -22,7 +22,7 @@ export default function AddItemToBox({uniqueBox}) {
                                 <option value={uniqueBox.id}>{uniqueBox.name}</option>
                         </select>
                     </div>
-                <button type="submit" name="_method" value="create" className="bg-slate-200 py-2 px-6 rounded hover:bg-slate-400">Add To Box</button>
+                <button type="submit" name="_method" value="create" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300">Add To Box</button>
             </form>
         </div>
     )

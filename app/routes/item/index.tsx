@@ -1,4 +1,5 @@
 import { ActionFunction, Link, LoaderFunction, redirect, useLoaderData } from "remix"
+import ItemCard from "~/components/ItemCard"
 import { db } from "~/utils/db.server"
 
 type LoaderData = {
@@ -29,9 +30,7 @@ export default function Items() {
                     {
                         data.ItemList.map((item) => (
                             <Link to={`/item/${item.id}`} className="flex">
-                                <div className="flex border justify-between w-full border-slate-400 rounded p-4">
-                                    <h3 className="text-2xl font-bold">{item.name}</h3>
-                                </div>
+                                <ItemCard item={item}/>
                             </Link>
                         ))
                     }

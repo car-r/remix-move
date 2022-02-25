@@ -1,6 +1,7 @@
 import { Link, Outlet, useLoaderData } from "remix"
 import type { LinksFunction, LoaderFunction } from "remix"
 import { db } from "~/utils/db.server"
+import BoxCard from "~/components/BoxCard"
 
 type LoaderData = {
     BoxListItems: Array<{ id: string; room: string; size: string; name: string;}>
@@ -40,11 +41,7 @@ export default function Boxes() {
                 {
                     withoutUnpackedItems.map((box) => (
                         <Link to={`/box/${box.id}`}>
-                            <div className="flex flex-col border border-slate-200 rounded-md p-4 bg-white">
-                                <h3 className="text-3xl font-bold">{box.name}</h3>
-                                <h4 className="text-xl">{box.room}</h4>
-                                <p className="font-thin">{box.size}</p>
-                            </div>
+                            <BoxCard box={box}/>
                         </Link> 
                     ))
                     
@@ -52,11 +49,7 @@ export default function Boxes() {
                 {
                     unpackedItemsBox.map((box) => (
                         <Link to={`/box/${box.id}`}>
-                            <div className="flex flex-col border border-slate-200 rounded-md p-4 bg-white">
-                                <h3 className="text-3xl font-bold">{box.name}</h3>
-                                <h4 className="text-xl">{box.room}</h4>
-                                <p className="font-thin">{box.size}</p>
-                            </div>
+                            <BoxCard box={box}/>
                         </Link> 
                     ))
                 }

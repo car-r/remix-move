@@ -9,6 +9,11 @@ export const loader: LoaderFunction = async () => {
     return data
 }
 
+export type room = {
+    _count: number
+    room: string
+}
+
 export default function Dashboard() {
     const data = useLoaderData()
     console.log(data)
@@ -25,15 +30,14 @@ export default function Dashboard() {
                     <h2 className="text-2xl text-center">Items</h2>
                 </Link>
                 {
-                    data.rooms.map((room) => (
-                        <div className="border rounded-md p-2 bg-white">
+                    data.rooms.map((room: room) => (
+                        <Link to={`/room/${room.room}`}className="border rounded-md p-2 bg-white">
                             <p className="text-center text-8xl mb-2">{room._count}</p>
                             <h2 className="text-2xl text-center">{room.room} boxes</h2>
-                        </div>
+                        </Link>
                     ))
                 }
             </div>
-            
         </div>
     )
 }
