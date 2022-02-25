@@ -13,6 +13,7 @@ export const meta: MetaFunction = () => {
 };
 
 import styles from './styles/app.css'
+import NavBar from "./components/NavBar";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }]
@@ -27,10 +28,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="w-11/12 mx-auto">
+      <body className="w-11/12 mx-auto bg-neutral-50 h-screen flex flex-col">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
+        <NavBar />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
