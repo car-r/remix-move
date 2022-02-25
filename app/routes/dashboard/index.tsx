@@ -4,13 +4,8 @@ import { db } from "~/utils/db.server"
 export const loader: LoaderFunction = async () => {
     const numberOfBoxes = await db.box.count()
     const numberOfItems = await db.item.count()
-    const boxes = await db.box.findMany()
-    const boxNames = boxes.map((box) => (box.name))
-    const kitchenBoxes = await db.box.count({ where: {room: 'Kitchen'}})
-    const bedroomBoxes = await db.box.count({ where: {room: 'Bedroom'}})
-    const bathroomBoxes = await db.box.count({ where: {room: 'Bathroom'}})
-    const rooms = await db.box.groupBy({ by: ['room']})
-    let data = [numberOfBoxes, numberOfItems, kitchenBoxes, bedroomBoxes, bathroomBoxes, rooms]
+    const rooms = await db.box.groupBy({ by: ['room'], _count: true,  })
+    let data = {numberOfBoxes, numberOfItems, rooms}
     return data
 }
 
@@ -20,23 +15,23 @@ export default function Dashboard() {
     return (
         <div>
             Dashboard Route
-            <div className="grid grid-cols-2 gap-4">
-                <Link to='/box' className="border rounded p-2">
-                    <p className="text-center text-8xl mb-2">{data[0]}</p>
+            <div className="grid grid-cols-2 gap-4 mb-24">
+                <Link to='/box' className="border rounded-md bg-white p-2">
+                    <p className="text-center text-8xl mb-2">{data.numberOfBoxes}</p>
                     <h2 className="text-2xl text-center">Boxes</h2>
                 </Link>
-                <Link to='/item' className="border rounded p-2">
-                    <p className="text-center text-8xl mb-2">{data[1]}</p>
+                <Link to='/item' className="border rounded-md bg-white p-2">
+                    <p className="text-center text-8xl mb-2">{data.numberOfItems}</p>
                     <h2 className="text-2xl text-center">Items</h2>
                 </Link>
-                <div className="border rounded p-2">
-                    <p className="text-center text-8xl mb-2">{data[2]}</p>
-                    <h2 className="text-2xl text-center">Kitchen Boxes</h2>
-                </div>
-                <div className="border rounded p-2">
-                    <p className="text-center text-8xl mb-2">{data[3]}</p>
-                    <h2 className="text-2xl text-center">Bedroom Boxes</h2>
-                </div>
+                {
+                    data.rooms.map((room) => (
+                        <div className="border rounded-md p-2 bg-white">
+                            <p className="text-center text-8xl mb-2">{room._count}</p>
+                            <h2 className="text-2xl text-center">{room.room} boxes</h2>
+                        </div>
+                    ))
+                }
             </div>
             
         </div>
