@@ -8,23 +8,6 @@ export const loader: LoaderFunction = async () => {
     return boxes
 }
 
-function validateItemName(name: string) {
-    if (name.length < 3) {
-        return `Item name too short`;
-    }
-}
-
-type ActionData = {
-    formError?: string;
-    fieldErrors?: {
-        name: string | undefined;
-    }
-    fields? : {
-        name: string;
-    }
-}
-
-const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
@@ -57,13 +40,15 @@ export const action: ActionFunction = async ({ request }) => {
 
 
 
-    // WORKING VALIDATION
-
+    // ************************ //
+    // ** WORKING VALIDATION ** //
+    // ************************ //
     const errors = {
         name: '',
     }
 
     function checkItemName(name) {
+        // null check goes first
         if(!name || name.length < 3) {
             return errors.name = `Item name too short`
         }

@@ -36,11 +36,11 @@ export default function Boxes() {
                 </Link>
             </div>
             
-            <ul className="grid grid-cols-1 gap-4">
+            <ul className="grid grid-cols-1 gap-4 mb-24">
                 {
                     withoutUnpackedItems.map((box) => (
                         <Link to={`/box/${box.id}`}>
-                            <div className="flex flex-col border border-slate-400 rounded p-4">
+                            <div className="flex flex-col border border-slate-200 rounded-md p-4 bg-white">
                                 <h3 className="text-3xl font-bold">{box.name}</h3>
                                 <h4 className="text-xl">{box.room}</h4>
                                 <p className="font-thin">{box.size}</p>
@@ -52,7 +52,7 @@ export default function Boxes() {
                 {
                     unpackedItemsBox.map((box) => (
                         <Link to={`/box/${box.id}`}>
-                            <div className="flex flex-col border border-slate-400 rounded p-4">
+                            <div className="flex flex-col border border-slate-200 rounded-md p-4 bg-white">
                                 <h3 className="text-3xl font-bold">{box.name}</h3>
                                 <h4 className="text-xl">{box.room}</h4>
                                 <p className="font-thin">{box.size}</p>
