@@ -1,4 +1,6 @@
 import { ActionFunction, Link, LoaderFunction, redirect, useLoaderData } from "remix"
+import Button from "~/components/Button"
+import ButtonOutlined from "~/components/ButtonOutlined"
 import ItemCard from "~/components/ItemCard"
 import { db } from "~/utils/db.server"
 
@@ -22,8 +24,12 @@ export default function Items() {
             <h1 className="text-3xl">Items</h1>
             <div className="flex flex-col">
                 <div className="flex justify-between mb-4">
-                    <Link to='/box' className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300">Boxes</Link>
-                    <Link to='/item/new' className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300">Add Item</Link>
+                    <Link to='/box'>
+                        <ButtonOutlined children={"Boxes"} handleClick={null}/>
+                    </Link>
+                    <Link to='/item/new' >
+                        <Button children={"Add Item"} handleClick={null}/>
+                    </Link>
                 </div>
                 
                 <ul className="grid grid-cols-1 gap-4">

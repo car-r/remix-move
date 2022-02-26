@@ -6,7 +6,7 @@ export default function EditItemComponent({ uniqueItem }) {
     const actionData = useActionData()
     console.log(uniqueItem)
     return (
-        <div className="flex flex-col mb-4 border border-slate-200 p-4 rounded">
+        <div className="flex flex-col mb-4 border bg-white p-4 rounded">
             <form method="post" className="w-full">
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Name: </label>
@@ -29,7 +29,7 @@ export default function EditItemComponent({ uniqueItem }) {
                     </select>
                 </div>
                 <div className="flex justify-between">
-                    <button type="submit" name="_method" value="update" className="bg-blue-500/75 text-white py-2 px-6 rounded hover:bg-blue-700/75 transition-all duration-300">
+                    <button type="submit" name="_method" value="update" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300">
                         Update Item
                     </button>
                     <button type="submit" name="_method" value="delete" className="bg-red-400 text-white py-2 px-6 rounded hover:bg-red-600 transition-all duration-300">

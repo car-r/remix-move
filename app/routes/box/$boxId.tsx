@@ -3,6 +3,8 @@ import { useState } from "react"
 import { ActionFunction, Link, LoaderFunction, Outlet, redirect, useLoaderData, json, useActionData } from "remix"
 import AddItemToBox from "~/components/AddItemToBox"
 import BoxRouteCard from "~/components/BoxRouteCard"
+import Button from "~/components/Button"
+import ButtonOutlined from "~/components/ButtonOutlined"
 import EditBox from "~/components/EditBox"
 import { db } from "~/utils/db.server"
 
@@ -102,37 +104,26 @@ export default function BoxPage() {
    
     const [showAddItem, setShowAddItem] = useState(false)
     const [showEditBox, setShowEditBox] = useState(false)
+
+    const handleEditBox = () => setShowEditBox(!showEditBox)
+    const handleAddItem = () => setShowAddItem(!showAddItem)
     
     return (
         <div className="flex flex-col my-4">
             <div className="mb-4 flex justify-between">
-                <div 
-                    onClick={() => setShowAddItem(!showAddItem)} 
-                    className="py-2 px-6 border border-indigo-400 rounded 
-                    hover:bg-indigo-400 hover:underline hover:text-white transition-all ease-in-out duration-300 cursor-pointer"
-                >
-                    Add Item
-                </div>
+                
+                <ButtonOutlined children="Add Item" handleClick={handleAddItem}/>
                 {uniqueBox.name === 'Unpacked Items' ? 
-                    <Link 
-                        to='/box' 
-                        className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded 
-                        hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300 cursor-pointer"
-                    >
-                        Boxes
-                    </Link> :
-                    <div 
-                        onClick={() => setShowEditBox(!showEditBox)} 
-                        className="bg-indigo-500 border border-indigo-400/75 bg-opacity-75 text-white py-2 px-6 rounded 
-                        hover:bg-neutral-100 hover:text-black hover:border hover:border-indigo-400 transition-all ease-in-out duration-300 cursor-pointer"
-                    >
-                        Edit Box
-                    </div>
+                    <Link to='/box'>
+                        <Button children="Boxes" handleClick={null}/>
+                    </Link>
+                    :
+                    <Button children="Edit Box" handleClick={handleEditBox}/>
                 }  
             </div>
 
-            {showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : <div></div>}
-            {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : <div></div>}
+            {showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : null}
+            {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : null}
             
             <BoxRouteCard box={uniqueBox}/>
         </div>

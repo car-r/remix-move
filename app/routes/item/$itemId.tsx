@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { ActionFunction, Link, LoaderFunction, Outlet, redirect, useLoaderData } from "remix"
+import Button from "~/components/Button"
+import ButtonOutlined from "~/components/ButtonOutlined"
 import EditItemComponent from "~/components/EditItemComponent"
-import EditItem from "~/components/EditItemComponent"
 import ItemRouteCard from "~/components/ItemRouteCard"
+
 import { db } from "~/utils/db.server"
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -19,6 +21,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         await db.item.delete({ where: {id: params.itemId}})
         return redirect('/item')
     }
+
     if (form.get('_method') === 'update') {
         const name = form.get('name')
         const boxId = form.get('boxId')
@@ -40,12 +43,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         }
 
         const fields = { name, boxId }
-        // if (
-        //     typeof name !== 'string' ||
-        //     typeof boxId !== 'string'
-        // ) {
-        //     throw new Error('Form not submitted correctly.')
-        // }
+
         await db.item.update({where: {id: params.itemId}, data: fields })
         return redirect(`/box/${boxId}`)
     }
@@ -56,39 +54,20 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function ItemPage() {
     const uniqueItem = useLoaderData()
     const [updateItem, setUpdateItem] = useState(false)
+    const handleUpdateItem = () => setUpdateItem(!updateItem)
     // console.log(uniqueItem)
     return (
         <div className="mt-10 flex flex-col">
             <div className="flex justify-between mb-4">
-                <Link to='/item' 
-                    className="py-2 px-6 border border-slate-200 rounded hover:bg-slate-100 hover:underline transition-all ease-in-out duration-300"
-                >
-                    Items
+                <Link to='/item'>
+                    <ButtonOutlined children={"Items"} handleClick={null}/>
                 </Link>
-                <div 
-                    className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300"
-                    onClick={() => setUpdateItem(!updateItem)}
-                >    
-                    Edit Item
-                </div>
+                <Button children={"Edit Item"} handleClick={handleUpdateItem}/>
             </div>
             {/* {updateItem ? <Outlet /> : <div></div>} */}
             { updateItem ? <EditItemComponent uniqueItem={uniqueItem}/> : <div></div> }
             
             <ItemRouteCard item={uniqueItem}/>
-            {/* {updateItem ? 
-                <form method="post">
-                    <input type="hidden" name="id" id={uniqueItem.id} />
-                    
-                    <button type="submit" name="_method" value="delete"
-                        className="bg-slate-400 bg-opacity-75 text-white py-2 px-6 rounded hover:bg-slate-200 hover:text-black transition-all ease-in-out duration-300"
-                    >
-                        Delete
-                    </button>
-                </form>
-                :
-                <div></div>
-            } */}
             
         </div>
         

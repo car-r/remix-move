@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from "remix"
+import { Link, LoaderFunction, useLoaderData } from "remix"
 import BoxCard from "~/components/BoxCard"
 import { db } from "~/utils/db.server"
 
@@ -14,14 +14,15 @@ export default function Room() {
     return (
         <div>
             Room
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 mb-24">
                 {
                     room.map((box) => (
-                        <BoxCard box={box}/>
+                        <Link to={`/box/${box.id}`}>
+                            <BoxCard box={box}/>
+                        </Link> 
                     ))
                 }
             </div>
         </div>
-
     )
 }
