@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export default function ItemRouteCard({item}) {
     return (
         <div className="flex flex-col rounded-md p-4 bg-white">
@@ -6,7 +8,7 @@ export default function ItemRouteCard({item}) {
                 Box: <span className="font-thin">{item.box.name}</span>
             </p>
             <p className="font-semibold mb-1">
-                Created: <span className="font-thin">{item.createdAt}</span>
+                Created: <span className="font-thin">{moment(item.createdAt).format('MMM DD, YYYY')}</span>
             </p>
         </div>
     )
