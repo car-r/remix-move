@@ -49,6 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     function checkItemName(name) {
         // null check goes first
+        // add regex checks
         if(!name || name.length < 3) {
             return errors.name = `Item name too short`
         }

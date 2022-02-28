@@ -22,18 +22,18 @@ export default function Dashboard() {
             Dashboard Route
             <div className="grid grid-cols-2 gap-4 mb-24">
                 <Link to='/box' className="border rounded-md bg-white p-2">
-                    <p className="text-center text-8xl mb-2">{data.numberOfBoxes}</p>
-                    <h2 className="text-2xl text-center">Boxes</h2>
+                    <p className="text-center text-7xl mb-2">{data.numberOfBoxes}</p>
+                    <h2 className="text-xl text-center">Boxes</h2>
                 </Link>
                 <Link to='/item' className="border rounded-md bg-white p-2">
-                    <p className="text-center text-8xl mb-2">{data.numberOfItems}</p>
-                    <h2 className="text-2xl text-center">Items</h2>
+                    <p className="text-center text-7xl mb-2">{data.numberOfItems}</p>
+                    <h2 className="text-xl text-center">Items</h2>
                 </Link>
                 {
                     data.rooms.map((room: room) => (
                         <Link to={`/room/${room.room}`}className="border rounded-md p-2 bg-white">
-                            <p className="text-center text-8xl mb-2">{room._count}</p>
-                            <h2 className="text-2xl text-center">{room.room} boxes</h2>
+                            <p className="text-center text-7xl mb-2">{room._count}</p>
+                            <h2 className="text-xl text-center">{room.room} boxes</h2>
                         </Link>
                     ))
                 }

@@ -47,7 +47,6 @@ export const action: ActionFunction = async ({ request, params }) => {
         await db.item.update({where: {id: params.itemId}, data: fields })
         return redirect(`/box/${boxId}`)
     }
-    
 }
 
 

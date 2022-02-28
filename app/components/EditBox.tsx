@@ -1,8 +1,16 @@
 import { useActionData } from "remix"
 import { action } from "~/routes/box/$boxId"
 
+export type UniqueBox = {
+    uniqueBox: object;
+}
 
-export default function EditBox({ uniqueBox }) {
+export type uniqueBox = {
+    name: string;
+    box: string;
+}
+
+export default function EditBox({ uniqueBox }: UniqueBox) {
     const actionData = useActionData()
     return (
         <div className="mb-4 flex p-4 rounded-md bg-white">
@@ -12,7 +20,7 @@ export default function EditBox({ uniqueBox }) {
                     <input 
                         type="text" 
                         name="name" 
-                        defaultValue={uniqueBox.name} 
+                        defaultValue={uniqueBox.name}
                         className="border border-slate-200 rounded px-2 py-1"
                     />
                     {actionData?.errors.name && (
@@ -39,10 +47,22 @@ export default function EditBox({ uniqueBox }) {
                     </select>
                 </div>
                 <div className="flex justify-between">
-                    <button type="submit" name="_method" value="update" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300">
+                    <button 
+                        type="submit" 
+                        name="_method" 
+                        value="update" 
+                        className="bg-indigo-500/75 text-white py-2 px-6 rounded 
+                        hover:bg-indigo-700/75 transition-all duration-300"
+                    >
                         Save Box
                     </button>
-                    <button type="submit" name="_method" value="delete" className="bg-red-400 text-white py-2 px-6 rounded hover:bg-red-600 transition-all duration-300">
+                    <button 
+                        type="submit" 
+                        name="_method" 
+                        value="delete" 
+                        className="bg-red-400 text-white py-2 px-6 rounded 
+                        hover:bg-red-600 transition-all duration-300"
+                    >
                         Delete
                     </button>
                 </div>   

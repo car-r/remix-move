@@ -1,11 +1,34 @@
 import { Link } from "remix";
+import moment from 'moment'
 
-export default function BoxRouteCard({box}) {
+export type BoxProps = {
+    name: string;
+    size: string;
+    room: string;
+    id: string;
+    updatedAt: string;
+    items: ItemProps[];
+}
+
+export type Box = {
+    box: BoxProps;
+}
+
+export type ItemProps = {
+    name: string;
+    id: string;
+    updatedAt: string;
+}
+
+
+export default function BoxRouteCard({box}: Box) {
     return (
         <div className="rounded-md p-4 bg-white">
             <h3 className="text-2xl font-bold">{box.name}</h3>
                 <p className="font-semibold">Room: <span className="font-thin">{box.room}</span></p>
-                <p className="font-semibold mb-1">Size: <span className="font-thin">{box.size}</span></p>
+                <p className="font-semibold">Box size: <span className="font-thin">{box.size}</span></p>
+                <p className="font-semibold">Last updated: <span className="font-thin">{moment(box.updatedAt).format('MMM DD, YYYY')}</span></p>
+                <p className="font-semibold mb-1">Items: </p>
                 <div className="grid grid-cols-1 gap-3">
                     {
                         box.items.map((item) => (

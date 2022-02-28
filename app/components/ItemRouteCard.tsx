@@ -8,7 +8,7 @@ export default function ItemRouteCard({item}) {
                 Box: <span className="font-thin">{item.box.name}</span>
             </p>
             <p className="font-semibold mb-1">
-                Created: <span className="font-thin">{moment(item.createdAt).format('MMM DD, YYYY')}</span>
+                Last updated: <span className="font-thin">{moment(item.updatedAt).format('MMM DD, YYYY')}</span>
             </p>
         </div>
     )
