@@ -23,8 +23,26 @@ export const action: ActionFunction = async ({ request, params }) => {
     
     // grab Unpacked Items boxId // findUnique wouldn't work??? vvv
     const unassignedBox = await db.box.findMany({ where: {name: 'Unpacked Items'}})
-    // need to reassign all items in the box to Unpacked Items box
     
+    
+    // Action to handle deleting a box
+    if (form.get('_method') === 'delete') {
+        // reassign all items in the current box to Unpacked Items box
+        const items = await db.item.findMany({ where: {boxId: params.boxId}})
+        await db.item.updateMany({
+            where: {
+                boxId: params.boxId || undefined
+            },
+            data: {
+                boxId: unassignedBox[0].id
+            }
+        })
+        // delete current box
+        await db.box.delete({ where: {id: params.boxId}})
+        return redirect('/box')
+    }
+
+
     if (form.get('_method') === 'create') {
         const name = form.get('name')
         const boxId = form.get('boxId')

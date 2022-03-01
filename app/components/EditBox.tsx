@@ -1,13 +1,16 @@
 import { useActionData } from "remix"
 import { action } from "~/routes/box/$boxId"
+import DeleteButton from "./DeleteButton"
+import UpdateButton from "./UpdateButton"
 
 export type UniqueBox = {
-    uniqueBox: object;
+    uniqueBox: uniqueBox;
 }
 
 export type uniqueBox = {
     name: string;
     box: string;
+    room: string;
 }
 
 export default function EditBox({ uniqueBox }: UniqueBox) {
@@ -47,24 +50,8 @@ export default function EditBox({ uniqueBox }: UniqueBox) {
                     </select>
                 </div>
                 <div className="flex justify-between">
-                    <button 
-                        type="submit" 
-                        name="_method" 
-                        value="update" 
-                        className="bg-indigo-500/75 text-white py-2 px-6 rounded 
-                        hover:bg-indigo-700/75 transition-all duration-300"
-                    >
-                        Save Box
-                    </button>
-                    <button 
-                        type="submit" 
-                        name="_method" 
-                        value="delete" 
-                        className="bg-red-400 text-white py-2 px-6 rounded 
-                        hover:bg-red-600 transition-all duration-300"
-                    >
-                        Delete
-                    </button>
+                    <UpdateButton />
+                    <DeleteButton />
                 </div>   
             </form>
         </div>

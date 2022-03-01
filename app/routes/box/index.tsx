@@ -17,7 +17,6 @@ export const loader: LoaderFunction = async () => {
 }
 
 
-
 export default function Boxes() {
     const data = useLoaderData<LoaderData>()
     
