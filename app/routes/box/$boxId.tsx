@@ -53,7 +53,7 @@ export const action: ActionFunction = async ({ request, params }) => {
             boxId: ''
         }
 
-        function checkItemName(name) {
+        function checkItemName(name: string | any) {
             if(!name || name.length < 3) {
                 return errors.name = `Item name too short`
             }
@@ -89,7 +89,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         }
 
         // check if box name is null or less than 3 characters
-        function checkBoxName(name) {
+        function checkBoxName(name: string | any) {
             if(!name || name.length < 3) {
                 return errors.name = `Box name too short`
             }
@@ -97,7 +97,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         checkBoxName(name)
 
         // check if box room name is null or less than 3 characters
-        function checkRoomName(room) {
+        function checkRoomName(room: string | any) {
             if(!room || room.length < 3) {
                 return errors.room = `Room name too short`
             }
@@ -129,8 +129,10 @@ export default function BoxPage() {
     return (
         <div className="flex flex-col my-4">
             <div className="mb-4 flex justify-between">
+                <div onClick={handleAddItem}>
+                    <ButtonOutlined children="Add Item" />                                                                                
+                </div>
                 
-                <ButtonOutlined children="Add Item" handleClick={handleAddItem}/>
                 {uniqueBox.name === 'Unpacked Items' ? 
                     <Link to='/box'>
                         <Button children="Boxes" handleClick={null}/>
