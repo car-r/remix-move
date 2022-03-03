@@ -44,8 +44,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 
     if (form.get('_method') === 'create') {
-        const name = form.get('name')
-        const boxId = form.get('boxId')
+        const name: string | any = form.get('name')
+        const boxId: string | any = form.get('boxId')
 
         // Validation checks for adding a new item to a box
         const errors = {
@@ -78,9 +78,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     // Action to handle updating box information
     if(form.get('_method') === 'update') {
-        const name = form.get('name')
-        const room = form.get('room')
-        const size = form.get('size')
+        const name: any = form.get('name')
+        const room: any = form.get('room')
+        const size: any = form.get('size')
  
         // Validation checks for updating box information
         const errors = {
@@ -109,7 +109,12 @@ export const action: ActionFunction = async ({ request, params }) => {
             return { errors, values }
         }
 
-        const fields = { name, room, size }
+        const fields = { 
+            name, 
+            room, 
+            size 
+        }
+
         await db.box.update({where: {id: params.boxId}, data: fields })
         return redirect(`/box/${params.boxId}`)
     }
@@ -135,10 +140,13 @@ export default function BoxPage() {
                 
                 {uniqueBox.name === 'Unpacked Items' ? 
                     <Link to='/box'>
-                        <Button children="Boxes" handleClick={null}/>
+                        <Button children="Boxes" />
                     </Link>
                     :
-                    <Button children="Edit Box" handleClick={handleEditBox}/>
+                    <div onClick={handleEditBox}>
+                        <Button children="Edit Box" />
+                    </div>
+                    
                 }  
             </div>
 

@@ -1,9 +1,19 @@
 import { ActionFunction, redirect, useActionData } from "remix"
 import { db } from "~/utils/db.server"
 
+export type UniqueBox = {
+    name: string;
+    size: string;
+    room: string;
+    id: string;
+    updatedAt: string;
+}
 
+export type Box = {
+    uniqueBox: UniqueBox;
+}
 
-export default function AddItemToBox({uniqueBox}) {
+export default function AddItemToBox({uniqueBox}: Box) {
     const actionData = useActionData()
     return (
         <div className="mb-4 flex p-4 rounded-md bg-white">

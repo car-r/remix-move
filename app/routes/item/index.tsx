@@ -25,10 +25,10 @@ export default function Items() {
             <div className="flex flex-col">
                 <div className="flex justify-between mb-4">
                     <Link to='/box'>
-                        <ButtonOutlined children={"Boxes"} handleClick={null}/>
+                        <ButtonOutlined children={"Boxes"} />
                     </Link>
                     <Link to='/item/new' >
-                        <Button children={"Add Item"} handleClick={null}/>
+                        <Button children={"Add Item"} />
                     </Link>
                 </div>
                 

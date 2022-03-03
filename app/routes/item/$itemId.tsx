@@ -23,14 +23,14 @@ export const action: ActionFunction = async ({ request, params }) => {
     }
 
     if (form.get('_method') === 'update') {
-        const name = form.get('name')
-        const boxId = form.get('boxId')
+        const name: string | any = form.get('name')
+        const boxId: string | any = form.get('boxId')
 
         const errors = {
             name: '',
         }
 
-        function checkItemName(name) {
+        function checkItemName(name: string) {
             if(!name || name.length < 3) {
                 return errors.name = `Item name too short`
             }
@@ -59,9 +59,12 @@ export default function ItemPage() {
         <div className="mt-10 flex flex-col">
             <div className="flex justify-between mb-4">
                 <Link to='/item'>
-                    <ButtonOutlined children={"Items"} handleClick={null}/>
+                    <ButtonOutlined children={"Items"} />
                 </Link>
-                <Button children={"Edit Item"} handleClick={handleUpdateItem}/>
+                <div onClick={handleUpdateItem}>
+                    <Button children={"Edit Item"} />
+                </div>
+                
             </div>
             {/* {updateItem ? <Outlet /> : <div></div>} */}
             { updateItem ? <EditItemComponent uniqueItem={uniqueItem}/> : <div></div> }

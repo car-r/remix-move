@@ -29,10 +29,10 @@ export default function Boxes() {
             <h1 className="text-4xl mb-2">Boxes</h1>
             <div className="flex mb-4 justify-between">
                 <Link to='/dashboard'>
-                    <ButtonOutlined children={"Dashboard"} handleClick={null}/>
+                    <ButtonOutlined children={"Dashboard"} />
                 </Link>
                 <Link to='new'>
-                    <Button children={"Add Box"} handleClick={null}/>
+                    <Button children={"Add Box"} />
                 </Link>
             </div>
             
