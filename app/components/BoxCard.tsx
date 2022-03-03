@@ -3,7 +3,6 @@ export type BoxProps = {
     size: string;
     room: string;
     id: string;
-    updatedAt: string;
 }
 
 export type Box = {

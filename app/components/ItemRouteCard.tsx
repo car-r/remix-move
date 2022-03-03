@@ -1,6 +1,23 @@
 import moment from 'moment'
 
-export default function ItemRouteCard({item}) {
+
+
+export type Box = {
+    name: string;
+}
+
+export type ItemProps = {
+    name: string;
+    id: string;
+    updatedAt: string;
+    box: Box
+}
+
+export type Item = {
+    item: ItemProps
+}
+
+export default function ItemRouteCard({item}: Item) {
     return (
         <div className="flex flex-col rounded-md p-4 bg-white">
             <h3 className="text-2xl font-bold">{item.name}</h3>

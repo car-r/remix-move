@@ -1,6 +1,21 @@
 import {  useActionData } from "remix"
 
-export default function EditItemComponent({ uniqueItem }) {
+export type UniqueItem = {
+    uniqueItem: Item;
+}
+
+export type Item = {
+    name: string;
+    boxId: string;
+    boxes: Box[]
+}
+
+export type Box = {
+    name: string;
+    id: string;
+}
+
+export default function EditItemComponent({ uniqueItem }: UniqueItem) {
     const currentBox = uniqueItem.boxes.filter(box => box.id === uniqueItem.boxId)
     const alternateBoxes = uniqueItem.boxes.filter(box => box.id !== uniqueItem.boxId)
     const actionData = useActionData()
