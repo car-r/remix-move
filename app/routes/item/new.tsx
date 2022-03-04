@@ -2,12 +2,32 @@ import { json, LoaderFunction, redirect, useActionData, useLoaderData } from "re
 import type { ActionFunction } from "remix"
 
 import { db } from "~/utils/db.server"
+import AddItem from "~/components/AddItem"
+
+// type LoaderData = {
+//     BoxList: Array<{ id: string; name: string; }>
+// }
+
+// export const loader: LoaderFunction = async () => {
+//     const boxes: LoaderData = {
+//         BoxList: await db.box.findMany()
+//     }
+//     return boxes
+// }
 
 export const loader: LoaderFunction = async () => {
     const boxes = await db.box.findMany()
     return boxes
 }
 
+// export type Boxes = {
+//     box: Box[];
+// }
+
+// export type Box = {
+//     name: string;
+//     id: string;
+// }
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
@@ -15,30 +35,6 @@ export const action: ActionFunction = async ({ request }) => {
     const name = form.get('name')
     const boxId = form.get('boxId')
     
-    // FROM REMIX TUTORIAL DOCUMENTATION
-    // https://remix.run/docs/en/v1/tutorials/jokes
-
-    // if (
-    //     typeof name !== 'string' ||
-    //     typeof boxId !== 'string'
-    // ) {
-    //     // throw new Error('Form not submitted correctly.')
-    //     return badRequest({
-    //         formError: `Form not submitted correctly.`
-    //     })
-    // }
-
-    // const fieldErrors = {
-    //     name: validateItemName(name)
-    // }
-
-    // const fields = { name, boxId }
-
-    // if (Object.values(fieldErrors).some(Boolean)) {
-    //     return badRequest({ fieldErrors, fields })
-    // }
-
-
 
     // ************************ //
     // ** WORKING VALIDATION ** //
@@ -47,7 +43,7 @@ export const action: ActionFunction = async ({ request }) => {
         name: '',
     }
 
-    function checkItemName(name) {
+    function checkItemName(name: string | any) {
         // null check goes first
         // add regex checks
         if(!name || name.length < 3) {
@@ -61,21 +57,6 @@ export const action: ActionFunction = async ({ request }) => {
         return { errors, values }
     }
 
-    
-
-
-    // FROM REMIX DOCUMENTATION || Error WORKING but can't submit
-    // https://remix.run/docs/en/v1/api/remix#useactiondata
-    // const errors = { name: ''}
-
-    // if (typeof name !== 'string' || name.length < 3) {
-    //     errors.name = `Item name too short`
-    // }
-
-    // if (Object.keys(errors).length) {
-    //     return json(errors, { status: 422 })
-    // }
-
     const fields = { name, boxId }
 
     const item = await db.item.create( {data: fields })
@@ -86,43 +67,11 @@ export default function NewItem() {
     const boxes = useLoaderData()
     const actionData = useActionData()
     // const errors = useActionData()
-    console.log(boxes)
-    return (
+    console.log('new page ' + boxes)
+    return ( 
         <div>
-            <h1 className="text-3xl">New Item</h1>
-            <form method="post">
-                <div className="flex flex-col mb-4">
-                    <label className="mb-2">Name: </label>
-                    <input type="text" name="name" className="border border-slate-200 rounded px-2 py-1"/>
-                    {actionData?.errors?.name ? (
-                            <p
-                                className="text-red-400"
-                            >
-                                {actionData.errors.name}
-                            </p>
-                        ) : null
-                    }
-                    {/* {errors?.name ? (
-                        <p
-                        className="text-red-400"
-                    >
-                        {errors.name}
-                    </p>
-                    ): null} */}
-                </div>
-                <div className="flex flex-col mb-4">
-                    <label className="mb-2">Box: </label>
-                    <select name="boxId" className="border border-slate-200 rounded px-2 py-1">
-                        {/* TO DO - Don't assign a box to an item - Assign as Unpacked as workaround? */}
-                        {boxes.map((box) => (
-                            <option value={box.id}>{box.name}</option>
-                        ))}
-                    </select>
-                </div>
-                <button type="submit" className="bg-slate-200 py-2 px-6 rounded hover:bg-slate-400">
-                    Add Item
-                </button>
-            </form>
+            <h1 className="text-3xl mb-4">New Item</h1>
+            <AddItem boxes={boxes} /> 
         </div>
     ) 
 }
