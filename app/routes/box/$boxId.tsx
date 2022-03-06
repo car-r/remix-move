@@ -124,7 +124,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function BoxPage() {
     const uniqueBox = useLoaderData()
-   
+    console.log(uniqueBox)
     const [showAddItem, setShowAddItem] = useState(false)
     const [showEditBox, setShowEditBox] = useState(false)
 
