@@ -31,7 +31,7 @@ export default function Room() {
     return (
         <div>
             <h1 className="text-3xl mb-4">{roomName} boxes</h1>
-            <div className="grid grid-cols-2 gap-4 mb-24">
+            <div className="grid grid-cols-2 gap-4 mb-20">
                 <div className="border rounded-md bg-white p-2">
                     <p className="text-center text-7xl mb-2">{room.numberOfBoxes}</p>
                     <h4 className="text-xl text-center">Total boxes</h4>
