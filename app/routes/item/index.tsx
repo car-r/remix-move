@@ -20,7 +20,7 @@ export default function Items() {
     const data = useLoaderData<LoaderData>()
     console.log(data)
     return (
-        <div className=" lg:col-span-4">
+        <div className="my-4 lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Items</h1>
             <div className="flex flex-col">
                 <div className="flex justify-between mb-4">

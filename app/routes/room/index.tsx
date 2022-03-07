@@ -10,7 +10,7 @@ export default function RoomHome() {
     const data = useLoaderData()
     console.log(data)
     return (
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-4 my-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Rooms</h1>
             <ul className="grid grid-cols-1 gap-4 mb-24">
                 {data.map((room) => (
