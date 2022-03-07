@@ -25,8 +25,8 @@ export default function Boxes() {
 
     console.log(withoutUnpackedItems, unpackedItemsBox)
     return (
-        <div className="flex flex-col">
-            <h1 className="text-4xl mb-2">Boxes</h1>
+        <div className="flex flex-col lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Boxes</h1>
             <div className="flex mb-4 justify-between">
                 <Link to='/dashboard'>
                     <ButtonOutlined children={"Dashboard"} />
@@ -35,8 +35,7 @@ export default function Boxes() {
                     <Button children={"Add Box"} />
                 </Link>
             </div>
-            
-            <ul className="grid grid-cols-1 gap-4 mb-24">
+            <ul className="grid gap-4 mb-24 ">
                 {
                     withoutUnpackedItems.map((box) => (
                         <Link to={`/box/${box.id}`}>
@@ -53,6 +52,7 @@ export default function Boxes() {
                     ))
                 }
             </ul>
+ 
         </div>
     
     )

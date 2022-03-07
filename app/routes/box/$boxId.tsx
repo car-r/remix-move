@@ -132,7 +132,8 @@ export default function BoxPage() {
     const handleAddItem = () => setShowAddItem(!showAddItem)
     
     return (
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-4 lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Box: <span className="font-light">{uniqueBox.name}</span></h1>
             <div className="mb-4 flex justify-between">
                 <div onClick={handleAddItem}>
                     <ButtonOutlined children="Add Item" />                                                                                
@@ -149,9 +150,11 @@ export default function BoxPage() {
                     
                 }  
             </div>
-
-            {showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : null}
-            {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : null}
+            <div className="lg:flex lg:gap-4">
+                {showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : null}
+                {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : null}
+            </div>
+            
             
             <BoxRouteCard box={uniqueBox}/>
         </div>

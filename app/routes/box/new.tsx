@@ -42,8 +42,8 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewBox() {
     const actionData = useActionData()
     return (
-        <div>
-            <h1 className="text-3xl mb-4">New Box</h1>
+        <div className="lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">New Box</h1>
             <AddBox />
         </div>
     ) 

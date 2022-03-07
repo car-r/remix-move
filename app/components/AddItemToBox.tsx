@@ -16,8 +16,8 @@ export type Box = {
 export default function AddItemToBox({uniqueBox}: Box) {
     const actionData = useActionData()
     return (
-        <div className="mb-4 flex p-4 rounded-md bg-white">
-            <form method="post" className="w-full">
+        <div className="mb-4 flex p-4 rounded-md bg-white lg:w-1/2">
+            <form method="post" className="w-full flex flex-col">
                 <input type="hidden" name="_method" value="addBox" />
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Name: </label>
@@ -32,7 +32,7 @@ export default function AddItemToBox({uniqueBox}: Box) {
                                 <option value={uniqueBox.id}>{uniqueBox.name}</option>
                         </select>
                     </div>
-                <button type="submit" name="_method" value="create" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300">Add To Box</button>
+                <button type="submit" name="_method" value="create" className="bg-indigo-500/75 text-white py-2 px-6 rounded hover:bg-indigo-700/75 transition-all duration-300 lg:mt-auto ">Add To Box</button>
             </form>
         </div>
     )

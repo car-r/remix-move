@@ -4,30 +4,11 @@ import type { ActionFunction } from "remix"
 import { db } from "~/utils/db.server"
 import AddItem from "~/components/AddItem"
 
-// type LoaderData = {
-//     BoxList: Array<{ id: string; name: string; }>
-// }
-
-// export const loader: LoaderFunction = async () => {
-//     const boxes: LoaderData = {
-//         BoxList: await db.box.findMany()
-//     }
-//     return boxes
-// }
 
 export const loader: LoaderFunction = async () => {
     const boxes = await db.box.findMany()
     return boxes
 }
-
-// export type Boxes = {
-//     box: Box[];
-// }
-
-// export type Box = {
-//     name: string;
-//     id: string;
-// }
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
@@ -69,8 +50,8 @@ export default function NewItem() {
     // const errors = useActionData()
     console.log('new page ' + boxes)
     return ( 
-        <div>
-            <h1 className="text-3xl mb-4">New Item</h1>
+        <div className="lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">New Item</h1>
             <AddItem boxes={boxes} /> 
         </div>
     ) 
