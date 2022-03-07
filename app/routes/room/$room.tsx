@@ -29,7 +29,7 @@ export default function Room() {
     console.log(itemsInRoom, itemCount)
     
     return (
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Room: <span className="font-light">{roomName}</span></h1>
             <div className="grid grid-cols-2 gap-4 mb-20">
                 <div className="border rounded-md bg-neutral-100  p-2">

@@ -50,8 +50,8 @@ export default function NewItem() {
     // const errors = useActionData()
     console.log('new page ' + boxes)
     return ( 
-        <div className="lg:col-span-3">
-            <h1 className="text-3xl mb-4">New Item</h1>
+        <div className="lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">New Item</h1>
             <AddItem boxes={boxes} /> 
         </div>
     ) 

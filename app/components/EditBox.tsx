@@ -16,7 +16,7 @@ export type uniqueBox = {
 export default function EditBox({ uniqueBox }: UniqueBox) {
     const actionData = useActionData()
     return (
-        <div className="mb-4 flex p-4 rounded-md bg-white">
+        <div className="mb-4 flex p-4 rounded-md bg-white lg:w-1/2">
             <form method="post" className="w-full">
                 <div className="flex flex-col mb-4">
                     <label className="mb-2">Box Name: </label>

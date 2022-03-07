@@ -29,7 +29,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="w-11/12 mx-auto bg-neutral-200 h-screen flex flex-col pt-3 lg:grid grid-cols-4 max-w-7xl">
+      <body className="w-11/12 mx-auto bg-neutral-200 h-screen flex flex-col pt-3 lg:grid grid-cols-6 max-w-7xl">
         <SideBar />
         <Outlet />
         <ScrollRestoration />

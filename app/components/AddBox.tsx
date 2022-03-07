@@ -3,7 +3,7 @@ import { useActionData } from "remix"
 export default function AddBox() {
     const actionData = useActionData()
     return (
-        <div>
+        <div className="lg:w-3/5">
             <div className="mb-4 flex p-4 rounded-md bg-white">
                 <form method="post" className="w-full">
                     <input type="hidden" name="_method" value="addBox" />
