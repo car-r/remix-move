@@ -11,7 +11,7 @@ export default function RoomHome() {
     console.log(data)
     return (
         <div>
-            <h1 className="text-3xl mb-4">Rooms</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Rooms</h1>
             <ul className="grid grid-cols-1 gap-4 mb-24">
                 {data.map((room) => (
                     <Link to={`/room/${room.room}`} className=" border border-white rounded-md p-4 bg-white hover:border-indigo-500">

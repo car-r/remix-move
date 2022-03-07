@@ -1,7 +1,5 @@
 import moment from 'moment'
 
-
-
 export type Box = {
     name: string;
 }

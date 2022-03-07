@@ -56,7 +56,7 @@ export default function ItemPage() {
     const handleUpdateItem = () => setUpdateItem(!updateItem)
     // console.log(uniqueItem)
     return (
-        <div className="mt-10 flex flex-col">
+        <div className="mt-10 flex flex-col lg:col-span-3">
             <div className="flex justify-between mb-4">
                 <Link to='/item'>
                     <ButtonOutlined children={"Items"} />

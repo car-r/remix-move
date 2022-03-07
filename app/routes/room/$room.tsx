@@ -29,21 +29,21 @@ export default function Room() {
     console.log(itemsInRoom, itemCount)
     
     return (
-        <div>
-            <h1 className="text-3xl mb-4">{roomName} boxes</h1>
+        <div className="lg:col-span-3">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Room: <span className="font-light">{roomName}</span></h1>
             <div className="grid grid-cols-2 gap-4 mb-20">
-                <div className="border rounded-md bg-white p-2">
+                <div className="border rounded-md bg-neutral-100  p-2">
                     <p className="text-center text-7xl mb-2">{room.numberOfBoxes}</p>
                     <h4 className="text-xl text-center">Total boxes</h4>
                 </div>
-                <div className="border rounded-md bg-white p-2">
+                <div className="border rounded-md bg-neutral-100 p-2">
                     <p className="text-center text-7xl mb-2">{itemCount}</p>
                     <h4 className="text-xl text-center">Total items</h4>
                 </div>
             </div>
             <div className="grid grid-cols-1 gap-4 mb-24 lg:grid-cols-2">
                 <div className="grid grid-cols-1 gap-4 mb-4 lg:flex lg:flex-col">
-                    <h3 className="text-2xl">Boxes</h3>
+                    <h3 className="text-2xl lg:text-3xl font-light pb-2 border border-b-neutral-300">Boxes</h3>
                     {
                         room.room.map((box) => (
                             <Link to={`/box/${box.id}`}>
@@ -53,14 +53,13 @@ export default function Room() {
                     }
                 </div>
                 <div className="grid grid-cols-1 gap-4 lg:flex lg:flex-col">
-                    <h3 className="text-2xl">Items</h3>
+                    <h3 className="text-2xl lg:text-3xl font-light pb-2 border border-b-neutral-300">Items</h3>
                     { itemsInRoom.map((item) => (
                         <Link to={`/item/${item.id}`}>
                             <ItemCard item={item}/>
                         </Link>
                     ))}
                 </div>
-                
             </div>
         </div>
     )

@@ -132,7 +132,7 @@ export default function BoxPage() {
     const handleAddItem = () => setShowAddItem(!showAddItem)
     
     return (
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-4 lg:col-span-3">
             <div className="mb-4 flex justify-between">
                 <div onClick={handleAddItem}>
                     <ButtonOutlined children="Add Item" />                                                                                

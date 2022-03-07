@@ -42,7 +42,7 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewBox() {
     const actionData = useActionData()
     return (
-        <div>
+        <div className="lg:col-span-2">
             <h1 className="text-3xl mb-4">New Box</h1>
             <AddBox />
         </div>
