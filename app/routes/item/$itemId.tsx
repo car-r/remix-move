@@ -56,7 +56,7 @@ export default function ItemPage() {
     const handleUpdateItem = () => setUpdateItem(!updateItem)
     // console.log(uniqueItem)
     return (
-        <div className="mt-10 flex flex-col lg:col-span-4">
+        <div className="flex flex-col lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Item: <span className="font-light">{uniqueItem.name}</span></h1>
             <div className="flex justify-between mb-4">
                 <Link to='/item'>
