@@ -28,11 +28,8 @@ export default function Boxes() {
         <div className="flex flex-col lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Boxes</h1>
             <div className="flex mb-4 justify-between">
-                <Link to='/dashboard'>
-                    <ButtonOutlined children={"Dashboard"} />
-                </Link>
                 <Link to='new'>
-                    <Button children={"Add Box"} />
+                    <ButtonOutlined children={"Add Box"} />
                 </Link>
             </div>
             <ul className="grid gap-4 mb-24 ">

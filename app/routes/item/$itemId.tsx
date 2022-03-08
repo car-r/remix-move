@@ -59,9 +59,9 @@ export default function ItemPage() {
         <div className="flex flex-col lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Item: <span className="font-light">{uniqueItem.name}</span></h1>
             <div className="flex justify-between mb-4">
-                <Link to='/item'>
+                {/* <Link to='/item'>
                     <ButtonOutlined children={"Items"} />
-                </Link>
+                </Link> */}
                 <div onClick={handleUpdateItem}>
                     <Button children={"Edit Item"} />
                 </div>

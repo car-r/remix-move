@@ -24,11 +24,8 @@ export default function Items() {
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Items</h1>
             <div className="flex flex-col">
                 <div className="flex justify-between mb-4">
-                    <Link to='/box'>
-                        <ButtonOutlined children={"Boxes"} />
-                    </Link>
-                    <Link to='/item/new' >
-                        <Button children={"Add Item"} />
+                    <Link to='/item/new'>
+                        <ButtonOutlined children={"Add Item"} />
                     </Link>
                 </div>
                 
