@@ -6,6 +6,7 @@ import BoxRouteCard from "~/components/BoxRouteCard"
 import Button from "~/components/Button"
 import ButtonOutlined from "~/components/ButtonOutlined"
 import EditBox from "~/components/EditBox"
+import ItemRouteCard from "~/components/ItemRouteCard"
 import { db } from "~/utils/db.server"
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -155,8 +156,11 @@ export default function BoxPage() {
                 {showEditBox ? <EditBox uniqueBox={uniqueBox}/> : null}
             </div>
             
+            <div className="">
+                <BoxRouteCard box={uniqueBox}/>
+                {/* <Outlet /> */}
+            </div>
             
-            <BoxRouteCard box={uniqueBox}/>
         </div>
         
     )
