@@ -4,6 +4,8 @@ import { db } from "~/utils/db.server"
 import BoxCard from "~/components/BoxCard"
 import Button from "~/components/Button"
 import ButtonOutlined from "~/components/ButtonOutlined"
+import SideBar from "~/components/SideBar"
+import NavBar from "~/components/NavBar"
 
 type LoaderData = {
     BoxListItems: Array<{ id: string; room: string; size: string; name: string;}>
@@ -49,8 +51,6 @@ export default function Boxes() {
                     ))
                 }
             </ul>
- 
         </div>
-    
     )
 }
