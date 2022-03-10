@@ -18,13 +18,22 @@ export const loader: LoaderFunction = async ({ params }) => {
 export const action: ActionFunction = async ({ request, params }) => {
     const form = await request.formData()
     if (form.get('_method') === 'delete') {
+        const boxId: string | any = form.get('boxId')
+        const date: any = new Date
+        const updatedAt = date.toISOString()
+        const boxFields = { updatedAt }
+
         await db.item.delete({ where: {id: params.itemId}})
+        // update updatedAt entry for box containing updated item
+        await db.box.update({where: {id: boxId}, data: boxFields })
         return redirect('/item')
     }
 
     if (form.get('_method') === 'update') {
         const name: string | any = form.get('name')
         const boxId: string | any = form.get('boxId')
+        const date: any = new Date
+        const updatedAt = date.toISOString()
 
         const errors = {
             name: '',
@@ -42,9 +51,12 @@ export const action: ActionFunction = async ({ request, params }) => {
             return { errors, values }
         }
 
-        const fields = { name, boxId }
+        const fields = { name, boxId, updatedAt }
+        const boxFields = { updatedAt }
 
         await db.item.update({where: {id: params.itemId}, data: fields })
+        // update updatedAt entry for box containing updated item
+        await db.box.update({where: {id: boxId}, data: boxFields })
         return redirect(`/box/${boxId}`)
     }
 }
