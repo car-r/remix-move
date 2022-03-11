@@ -25,7 +25,10 @@ export default function BoxRouteCard({box}: Box) {
     return (
         <div className="rounded-md p-4 bg-white lg:w-1/2">
             <h3 className="text-2xl font-bold">{box.name}</h3>
-                <p className="font-semibold">Room: <span className="font-thin">{box.room}</span></p>
+                <Link to={`/room/${box.room}`}>
+                    <p className="font-semibold hover:underline underline-offset-2 inline-block">Room: <span className="font-thin">{box.room}</span></p>
+                </Link>
+                
                 <p className="font-semibold">Box size: <span className="font-thin">{box.size}</span></p>
                 <p className="font-semibold">Last updated: <span className="font-thin">{moment(box.updatedAt).format('MMM DD, YYYY')}</span></p>
                 {box.items.length < 1 ? 
