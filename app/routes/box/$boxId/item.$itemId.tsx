@@ -73,6 +73,8 @@ export const action: ActionFunction = async ({ request, params }) => {
         const name: any = form.get('name')
         const room: any = form.get('room')
         const size: any = form.get('size')
+        const date: any = new Date
+        const updatedAt = date.toISOString()
  
         // Validation checks for updating box information
         const errors = {
@@ -104,7 +106,8 @@ export const action: ActionFunction = async ({ request, params }) => {
         const fields = { 
             name, 
             room, 
-            size 
+            size,
+            updatedAt
         }
 
         await db.box.update({where: {id: params.boxId}, data: fields })
