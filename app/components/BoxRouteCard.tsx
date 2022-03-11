@@ -46,7 +46,6 @@ export default function BoxRouteCard({box}: Box) {
                     </div>
                 </div>
                 }
-                
         </div>
     )
 }
