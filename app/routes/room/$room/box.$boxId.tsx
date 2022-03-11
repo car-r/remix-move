@@ -12,7 +12,7 @@ export default function BoxInRoom() {
     const data = useLoaderData()
     console.log(data)
     return (
-        <div className="">
+        <div className="grid grid-cols-1 gap-4">
             {data.items.map((item: any) => (
                 <Link to={`/item/${item.id}`}>
                     <ItemCard item={item}/>
