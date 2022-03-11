@@ -1,5 +1,6 @@
-import { Link, LoaderFunction, useLoaderData } from "remix"
+import { Link, LoaderFunction, Outlet, useLoaderData } from "remix"
 import BoxCard from "~/components/BoxCard"
+import BoxCardInRoom from "~/components/BoxCardInRoom"
 import ItemCard from "~/components/ItemCard"
 import { db } from "~/utils/db.server"
 
@@ -46,20 +47,25 @@ export default function Room() {
                     <h3 className="text-2xl lg:text-3xl font-light pb-2 border border-b-neutral-300">Boxes</h3>
                     {
                         room.room.map((box) => (
-                            <Link to={`/box/${box.id}`}>
-                                <BoxCard box={box}/>
+                            <Link to={`box/${box.id}`}>
+                                <BoxCardInRoom box={box}/>
                             </Link> 
                         ))
                     }
                 </div>
-                <div className="grid grid-cols-1 gap-4 lg:flex lg:flex-col">
+                {/* <div className="grid grid-cols-1 gap-4 lg:flex lg:flex-col">
                     <h3 className="text-2xl lg:text-3xl font-light pb-2 border border-b-neutral-300">Items</h3>
                     { itemsInRoom.map((item) => (
                         <Link to={`/item/${item.id}`}>
                             <ItemCard item={item}/>
                         </Link>
                     ))}
+                </div> */}
+                <div className="grid grid-cols-1 gap-4 lg:flex lg:flex-col">
+                    <h3 className="text-2xl lg:text-3xl font-light pb-2 border border-b-neutral-300">{`Items`}</h3>
+                    <Outlet />
                 </div>
+                
             </div>
         </div>
     )
