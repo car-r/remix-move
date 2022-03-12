@@ -23,7 +23,7 @@ export type ItemProps = {
 
 export default function BoxRouteCard({box}: Box) {
     return (
-        <div className="rounded-md p-4 bg-white lg:w-1/2">
+        <div className="rounded-md p-4 bg-white">
             <h3 className="text-2xl font-bold">{box.name}</h3>
                 <Link to={`/room/${box.room}`}>
                     <p className="font-semibold hover:underline underline-offset-2 inline-block">Room: <span className="font-thin">{box.room}</span></p>

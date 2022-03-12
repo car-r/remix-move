@@ -75,7 +75,7 @@ export default function ItemPage() {
                     <ButtonOutlined children={"Items"} />
                 </Link> */}
                 <div onClick={handleUpdateItem}>
-                    <Button children={"Edit Item"} />
+                    <ButtonOutlined children={"Edit Item"} />
                 </div>
                 
             </div>

@@ -83,7 +83,6 @@ export const action: ActionFunction = async ({ request, params }) => {
         const room: any = form.get('room')
         const size: any = form.get('size')
         const date: any = new Date
-
         const updatedAt = date.toISOString()
  
         // Validation checks for updating box information
@@ -137,7 +136,43 @@ export default function BoxPage() {
     const handleAddItem = () => setShowAddItem(!showAddItem)
     
     return (
-        <div className="flex flex-col lg:col-span-4">
+        <div className="lg:col-span-4">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Box: <span className="font-light">{uniqueBox.name}</span></h1>
+            <div className="mb-4 flex justify-between">
+                <div onClick={handleAddItem}>
+                    <ButtonOutlined children="Add Item" />                                                                                
+                </div>
+                
+                {uniqueBox.name === 'Unpacked Items' ? 
+                    <Link to='/box'>
+                        <Button children="Boxes" />
+                    </Link>
+                    :
+                    <div onClick={handleEditBox}>
+                        <Button children="Edit Box" />
+                    </div>
+                }  
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+                {showAddItem || showEditBox ?   
+                <div className="grid grid-cols-1 lg:grid-cols-4 lg:col-span-4 gap-4">
+                    <div className="col-span-1 lg:col-span-2">{showAddItem ? <AddItemToBox uniqueBox={uniqueBox}/> : null}</div>
+                    <div className="col-span-1 lg:col-span-2">{showEditBox ? <EditBox uniqueBox={uniqueBox}/> : null}</div>
+                </div>
+                : null }
+            
+                <div className="grid grid-cols-1 lg:grid-cols-4 lg:col-span-4 gap-4">
+                    <div className="lg:col-span-2"><BoxRouteCard box={uniqueBox}/></div>
+                    <div className="lg:col-span-2"><Outlet /></div>
+                </div>
+            </div>
+        </div>
+        
+    )
+}
+
+{/* <div className="flex flex-col lg:col-span-4">
             <h1 className="text-3xl md:text-4xl font-semibold mb-6 pb-2 border border-b-neutral-300">Box: <span className="font-light">{uniqueBox.name}</span></h1>
             <div className="mb-4 flex justify-between">
                 <div onClick={handleAddItem}>
@@ -165,7 +200,4 @@ export default function BoxPage() {
                 <Outlet />
             </div>
             
-        </div>
-        
-    )
-}
+        </div> */}
