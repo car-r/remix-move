@@ -19,7 +19,7 @@ export type Item = {
 
 export default function ItemRouteCard({item}: Item) {
     return (
-        <div className="flex flex-col rounded-md p-4 bg-white">
+        <div className="rounded-md p-4 bg-white">
             <h3 className="text-2xl font-bold">{item.name}</h3>
             <Link to={`/box/${item.box.id}`}>
                 <p className="font-semibold hover:underline underline-offset-2 inline-block">
